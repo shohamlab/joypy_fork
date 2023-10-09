@@ -470,11 +470,12 @@ def _joyplot(data,
                 else:
                     sublabel = sublabels[j]
 
+                element_zorder = group_zorder + j/(num_subgroups+1)
                 element_color = _get_color(i, num_axes, j, num_subgroups)
                 # matplotlib hist() already handles multiple subgroups in a histogram
                 a.hist(subgroup, label=sublabel, bins=bins, color=element_color,
                     range=[min(global_x_range), max(global_x_range)],
-                    edgecolor=linecolor, zorder=group_zorder, **kwargs)
+                    edgecolor=linecolor, zorder=element_zorder, **kwargs)
 
             # # matplotlib hist() already handles multiple subgroups in a histogram
             # a.hist(group, label=sublabels, bins=bins, color=color,
