@@ -63,9 +63,9 @@ def _is_numeric(x):
     """ Whether the array x is numeric. """
     return all(is_number(i) for i in x)
 
-def _get_alpha(i, n, start=0.4, end=1.0):
+def _get_alpha(i, n, start=1.0, end=0.5):
     """ Compute alpha value at position i out of n """
-    return start + (1 + i)*(end - start)/n
+    return start - (1 + i)*(start-end)/n
 
 def _remove_na(l):
     """ Remove NA values. Should work for lists, arrays, series. """
@@ -400,7 +400,6 @@ def _joyplot(data,
     kwarg : other plotting keyword arguments
         To be passed to hist/kde plot function
     """
-
     if fill is True and linecolor is None:
         linecolor = "k"
 
@@ -476,7 +475,7 @@ def _joyplot(data,
                 a.hist(subgroup, label=sublabel, bins=bins, color=element_color,
                     range=[min(global_x_range), max(global_x_range)],
                     edgecolor=linecolor, zorder=element_zorder, **kwargs)
-
+                
             # # matplotlib hist() already handles multiple subgroups in a histogram
             # a.hist(group, label=sublabels, bins=bins, color=color,
             #        range=[min(global_x_range), max(global_x_range)],
